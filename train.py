@@ -1,0 +1,80 @@
+from ultralytics import YOLO
+
+if __name__ == '__main__':
+    # 加载模型
+    model = YOLO("./ultralytics/cfg/models/11/yolo11_forSARm.yaml")  # 加载模型配置文件
+
+    # 训练模型
+    results = model.train(
+        task='detect',                   # 任务
+        mode='train',                    # 模式
+        data='./data/SARDet-100K.yaml',  # 数据配置文件路径
+        epochs=300,                      # 训练轮数
+        patience=50,                     # 早停的等待轮数
+        batch=32,                        # 批量大小
+        imgsz=512,                       # 输入图像大小
+        save=True,                       # 保存训练检查点和预测结果
+        save_period=-1,                  # 保存检查点的周期（-1 表示禁用）
+        cache=False,                     # 是否使用缓存加载数据
+        device='',                       # 使用的设备，默认为空（自动选择）
+        workers=8,                       # 数据加载的线程数
+        project='',                      # 项目名称
+        name='',                         # 实验名称
+        exist_ok=False,                  # 是否覆盖现有实验
+        pretrained=False,                # 是否使用预训练模型
+        optimizer='SGD',                 # 优化器
+        verbose=True,                    # 是否打印详细信息
+        seed=0,                          # 随机种子
+        deterministic=True,              # 是否启用确定性模式
+        single_cls=False,                # 是否将多类数据作为单类训练
+        rect=False,                      # 是否支持矩形训练
+        cos_lr=False,                    # 是否使用余弦学习率调度器
+        close_mosaic=10,                 # 最后10个epoch禁用马赛克增强
+        resume=False,                    # 是否从上一个检查点恢复训练
+        amp=True,                        # 是否使用自动混合精度（AMP）
+        fraction=1.0,                    # 训练数据集的分数（1.0 表示使用全部数据）
+        profile=False,                   # 是否在训练期间分析 ONNX 和 TensorRT 速度
+        freeze=None,                     # 冻结前 n 层或指定层的索引
+        multi_scale=False,               # 是否使用多尺度训练
+        val=True,                        # 是否在训练期间进行验证
+        split='val',                     # 验证数据集的分割类型
+        save_json=False,                 # 是否将结果保存为 JSON 文件
+        save_hybrid=False,               # 是否保存混合版本的标签
+        conf=0.001,                      # 目标检测的置信度阈值
+        iou=0.7,                         # NMS 的 IoU 阈值
+        max_det=300,                     # 每张图像的最大检测数
+        half=False,                      # 是否使用半精度（FP16）
+        dnn=False,                       # 是否使用 OpenCV DNN 进行 ONNX 推理
+        plots=True,                      # 是否保存训练/验证期间的图表
+        lr0=0.01,                        # 初始学习率
+        lrf=0.1,                         # 最终学习率（lr0 * lrf）
+        momentum=0.937,                  # SGD 动量/Adam beta1
+        weight_decay=0.0005,             # 优化器权重衰减
+        warmup_epochs=3.0,               # 热身 epochs
+        warmup_momentum=0.8,             # 热身初始动量
+        warmup_bias_lr=0.1,              # 热身初始偏差学习率
+        box=0.5,                         # 框损失增益
+        cls=3,                           # 分类损失增益
+        dfl=1.5,                         # DFL 损失增益
+        pose=12.0,                       # 姿态损失增益
+        kobj=1.0,                        # 关键点目标损失增益
+        nbs=64,                          # 名义批量大小
+        hsv_h=0.015,                     # 图像 HSV-Hue 增强
+        hsv_s=0.7,                       # 图像 HSV-Saturation 增强
+        hsv_v=0.4,                       # 图像 HSV-Value 增强
+        degrees=0.0,                     # 图像旋转
+        translate=0.1,                   # 图像平移
+        scale=0.9,                       # 图像缩放
+        shear=0.0,                       # 图像剪切
+        perspective=0.0,                 # 图像透视
+        flipud=0.0,                      # 图像上下翻转
+        fliplr=0.5,                      # 图像左右翻转
+        bgr=0.0,                         # 图像通道 BGR 增强
+        mosaic=1.0,                      # 图像马赛克增强
+        mixup=0.1,                       # 图像混合增强
+        copy_paste=0.0,                  # 分割复制粘贴增强
+        copy_paste_mode='flip',          # 复制粘贴增强模式
+        auto_augment='randaugment',     # 自动增强策略
+        erasing=0.4,                     # 随机擦除概率
+        crop_fraction=1.0                # 图像裁剪分数
+    )
