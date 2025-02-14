@@ -2,7 +2,7 @@ from ultralytics import YOLO
 
 if __name__ == '__main__':
     # 加载模型
-    model = YOLO("./ultralytics/cfg/models/11/yolo11_forSARm.yaml")  # 加载模型配置文件
+    model = YOLO("yolo11m.pt")  # 加载模型
 
     # 训练模型
     results = model.train(
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         project='',                      # 项目名称
         name='',                         # 实验名称
         exist_ok=False,                  # 是否覆盖现有实验
-        pretrained=False,                # 是否使用预训练模型
+        pretrained=True,                # 是否使用预训练模型
         optimizer='SGD',                 # 优化器
         verbose=True,                    # 是否打印详细信息
         seed=0,                          # 随机种子
