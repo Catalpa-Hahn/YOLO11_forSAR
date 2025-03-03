@@ -9,9 +9,9 @@
 path: ../Datasets/SARDet-100K
 
 train: # train images (relative to 'path')
-  - images/train_5/
+  - images/train/
 val: # val images (relative to 'path')
-  - images/train_5/
+  - images/val/
 test: # test images (optional)
   - images/test/
 
